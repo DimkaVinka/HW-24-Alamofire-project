@@ -9,26 +9,41 @@ import SwiftUI
 
 struct TableView: View {
     
-    @ObservedObject var controller = Controller()
+    var controller: Controller
     @State var show = false
-    @State private var columns = [
-        GridItem(.flexible())
-    ]
+    @State var columns = [GridItem()]
+    @State var comicsNames = [ItemsStruct]()
 
     var body: some View {
-        ZStack {
-            Color.init(hex: "#EC1D24")
-                .edgesIgnoringSafeArea(.all)
-            ScrollView(.vertical, showsIndicators: false) {
-                ForEach(controller.spiderManData, id: \.id) { card in
-                    CellView(image: "", name: "")
+        NavigationView {
+            ZStack {
+                Color.init(hex: "#EC1D24")
+                    .edgesIgnoringSafeArea(.all)
+                ScrollView(.vertical, showsIndicators: false) {
+                    Text("Spider-Man Versions")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 25, weight: .heavy, design: .rounded))
+                    LazyVGrid(columns: columns) {
+                        ForEach(controller.spiderManData, id: \.name) { card in
+                            CellView(image: makeImageURL(path: card.thumbnail.path, extensionToPath: card.thumbnail.extension), name: card.name)
+                        }
+                    }
                 }
             }
+            .navigationTitle("Versions")
+            .navigationBarHidden(true)
+            
         }
         
         if show {
             ContentView()
                 .transition(.asymmetric(insertion: .opacity, removal: .scale))
+        }
+    }
+    
+    func makeComics() {
+        for item in controller.spiderManData {
+            self.comicsNames = item.comics.items
         }
         
     }
@@ -40,6 +55,6 @@ struct TableView: View {
 
 struct TableView_Previews: PreviewProvider {
     static var previews: some View {
-        TableView()
+        TableView(controller: Controller())
     }
 }

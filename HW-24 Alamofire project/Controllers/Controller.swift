@@ -20,7 +20,7 @@ class Controller: ObservableObject {
     @Published var copyright = ""
     @Published var attributionText = ""
     @Published var spiderManData = [ResultStruct]()
-    @Published var comicsItemName = ""
+    @Published var comicsItemName = [String]()
     
     func getData() {
         delegate?.getCardsFromURL(complition: { card in

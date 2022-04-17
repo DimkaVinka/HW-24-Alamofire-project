@@ -52,7 +52,7 @@ struct ContentView: View {
                 }
                 
                 if show {
-                    TableView()
+                    TableView(controller: self.controller)
                         .transition(.asymmetric(insertion: .opacity, removal: .opacity))
                 }
         }
