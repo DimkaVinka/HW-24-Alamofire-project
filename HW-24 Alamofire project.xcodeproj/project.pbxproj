@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7D045167280C22590005A780 /* marvel 2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D045166280C22590005A780 /* marvel 2.otf */; };
+		7D5E6495280CAD500039BF8D /* ComicsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E6494280CAD4F0039BF8D /* ComicsListView.swift */; };
 		7D60F362280C28A800C33F39 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60F361280C28A800C33F39 /* ColorExtension.swift */; };
+		7D60F37E280C733600C33F39 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60F37D280C733600C33F39 /* ViewExtension.swift */; };
 		7D8A006F280812A6008F0BE2 /* HW_24_Alamofire_projectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A006E280812A6008F0BE2 /* HW_24_Alamofire_projectApp.swift */; };
 		7D8A0071280812A6008F0BE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A0070280812A6008F0BE2 /* ContentView.swift */; };
 		7D8A0073280812A8008F0BE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A0072280812A8008F0BE2 /* Assets.xcassets */; };
@@ -26,7 +28,9 @@
 /* Begin PBXFileReference section */
 		7D045161280C20B00005A780 /* HW-24-Alamofire-project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "HW-24-Alamofire-project-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7D045166280C22590005A780 /* marvel 2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "marvel 2.otf"; sourceTree = "<group>"; };
+		7D5E6494280CAD4F0039BF8D /* ComicsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsListView.swift; sourceTree = "<group>"; };
 		7D60F361280C28A800C33F39 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		7D60F37D280C733600C33F39 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		7D8A006B280812A6008F0BE2 /* HW-24 Alamofire project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HW-24 Alamofire project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D8A006E280812A6008F0BE2 /* HW_24_Alamofire_projectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HW_24_Alamofire_projectApp.swift; sourceTree = "<group>"; };
 		7D8A0070280812A6008F0BE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				7D8A0070280812A6008F0BE2 /* ContentView.swift */,
 				7D8A00812808157F008F0BE2 /* CellView.swift */,
 				7D8A0083280815A4008F0BE2 /* TableView.swift */,
+				7D5E6494280CAD4F0039BF8D /* ComicsListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 			children = (
 				7D8A008E280AAF4F008F0BE2 /* StringExtension.swift */,
 				7D60F361280C28A800C33F39 /* ColorExtension.swift */,
+				7D60F37D280C733600C33F39 /* ViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,12 +229,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5E6495280CAD500039BF8D /* ComicsListView.swift in Sources */,
 				7D8A0091280B54D2008F0BE2 /* Controller.swift in Sources */,
 				7D8A0071280812A6008F0BE2 /* ContentView.swift in Sources */,
 				7D8A0084280815A5008F0BE2 /* TableView.swift in Sources */,
 				7D8A0087280815BB008F0BE2 /* NetworkManager.swift in Sources */,
 				7D8A008C280AAF0C008F0BE2 /* URLConfiguration.swift in Sources */,
 				7D8A008F280AAF4F008F0BE2 /* StringExtension.swift in Sources */,
+				7D60F37E280C733600C33F39 /* ViewExtension.swift in Sources */,
 				7D8A006F280812A6008F0BE2 /* HW_24_Alamofire_projectApp.swift in Sources */,
 				7D8A00822808157F008F0BE2 /* CellView.swift in Sources */,
 				7D8A008A280815D2008F0BE2 /* CardModel.swift in Sources */,

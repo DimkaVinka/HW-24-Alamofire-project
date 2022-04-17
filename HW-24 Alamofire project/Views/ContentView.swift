@@ -10,13 +10,15 @@ import SwiftUI
 struct ContentView: View {
 
     @ObservedObject var controller = Controller()
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var show = false
     
     var body: some View {
-        NavigationView {
             ZStack(alignment: .center) {
-                NavigationLink {
-                    TableView()
+                Color.white.edgesIgnoringSafeArea(.all)
+                Button {
+                    withAnimation {
+                        self.show.toggle()
+                    }
                 } label: {
                     VStack {
                         Image("marvelLogo")
@@ -25,12 +27,13 @@ struct ContentView: View {
                         Text("Press to get Character")
                             .foregroundColor(Color.init(hex: "#EC1D24"))
                     }
-                }
                     .padding()
                     .background(Color.white)
                     .cornerRadius(16)
                     .shadow(radius: 5)
                     .navigationBarHidden(true)
+                }
+
                 Group {
                     if controller.isLoaded {
                         VStack(alignment: .center) {
@@ -47,7 +50,11 @@ struct ContentView: View {
                 .onAppear {
                     self.controller.getData()
                 }
-            }
+                
+                if show {
+                    TableView(controller: self.controller)
+                        .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                }
         }
     }
 }

@@ -19,22 +19,14 @@ class Controller: ObservableObject {
     
     @Published var copyright = ""
     @Published var attributionText = ""
-    @Published var spiderManName = ""
-    @Published var comicsItemName = ""
-    @Published var imageURL = ""
-
-    func makeImageURL(path: String, extensionToPath: String) -> String {
-        return path + "/landscape_xlarge." + extensionToPath
-    }
+    @Published var spiderManData = [ResultStruct]()
+    @Published var comicsItemName = [String]()
     
     func getData() {
         delegate?.getCardsFromURL(complition: { card in
             self.copyright = card.copyright
             self.attributionText = card.attributionText
-            for item in card.data.results {
-                self.spiderManName = item.name
-                self.imageURL = self.makeImageURL(path: item.thumbnail.path, extensionToPath: item.thumbnail.extension)
-            }
+            self.spiderManData = card.data.results
         })
         isLoaded = true
     }
