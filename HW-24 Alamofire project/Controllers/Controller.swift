@@ -15,8 +15,10 @@ class Controller: ObservableObject {
     
     private var delegate: NetworkManagerProtocol?
     
-    @Published var copyright = "copyright"
-    @Published var attributionText = "attribute text"
+    @Published var isLoaded = false
+    
+    @Published var copyright = ""
+    @Published var attributionText = ""
     @Published var spiderManName = ""
     @Published var comicsItemName = ""
     @Published var imageURL = ""
@@ -34,6 +36,7 @@ class Controller: ObservableObject {
                 self.imageURL = self.makeImageURL(path: item.thumbnail.path, extensionToPath: item.thumbnail.extension)
             }
         })
+        isLoaded = true
     }
     
     init() {
