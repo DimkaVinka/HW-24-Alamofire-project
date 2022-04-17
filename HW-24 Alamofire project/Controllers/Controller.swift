@@ -13,7 +13,7 @@ protocol NetworkManagerProtocol {
 
 class Controller: ObservableObject {
     
-    private var networkManager: NetworkManagerProtocol?
+    private var delegate: NetworkManagerProtocol?
     
     @Published var copyright = "copyright"
     @Published var attributionText = "attribute text"
@@ -26,7 +26,7 @@ class Controller: ObservableObject {
     }
     
     func getData() {
-        networkManager?.getCardsFromURL(complition: { card in
+        delegate?.getCardsFromURL(complition: { card in
             self.copyright = card.copyright
             self.attributionText = card.attributionText
             for item in card.data.results {
@@ -34,5 +34,9 @@ class Controller: ObservableObject {
                 self.imageURL = self.makeImageURL(path: item.thumbnail.path, extensionToPath: item.thumbnail.extension)
             }
         })
+    }
+    
+    init() {
+        delegate = NetworkManager()
     }
 }
