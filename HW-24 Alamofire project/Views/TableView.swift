@@ -12,34 +12,44 @@ struct TableView: View {
     var controller: Controller
     @State var show = false
     @State var columns = [GridItem()]
-
+    @State private var showModal = false
+    
     var body: some View {
         NavigationView {
             ZStack {
                 Color.init(hex: "#EC1D24")
                     .edgesIgnoringSafeArea(.all)
                 ScrollView(.vertical, showsIndicators: false) {
-                    Text("Spider-Man Versions")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 25, weight: .heavy, design: .rounded))
                     LazyVGrid(columns: columns) {
                         ForEach(controller.spiderManData, id: \.name) { card in
-                            NavigationLink {
-                                ComicsListView(comicsName: card.comics.items)
+                            Button {
+                                showModal = true
                             } label: {
                                 CellView(image: makeImageURL(path: card.thumbnail.path, extensionToPath: card.thumbnail.extension), name: card.name)
+                            }.sheet(isPresented: $showModal) {
+                                ComicsListView(comicsName: card.comics.items)
                             }
                         }
                     }
                 }
             }
-            .navigationTitle("Versions")
-            .navigationBarHidden(true)
+            .navigationTitle(Text("Spider-Man Versions"))
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    withAnimation(.easeInOut(duration: 1.0)) {
+                        Button {
+                            show = true
+                        } label: {
+                            Image(systemName: "house")
+                        }.foregroundColor(Color.black)
+                    }
+                }
+            }
+            
         }
-        
         if show {
             ContentView()
-                .transition(.asymmetric(insertion: .opacity, removal: .scale))
+                .transition(.asymmetric(insertion: .opacity, removal: .opacity))
         }
     }
     

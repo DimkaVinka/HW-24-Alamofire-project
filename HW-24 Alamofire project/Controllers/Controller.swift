@@ -16,17 +16,16 @@ class Controller: ObservableObject {
     private var delegate: NetworkManagerProtocol?
     
     @Published var isLoaded = false
-    
     @Published var copyright = ""
     @Published var attributionText = ""
     @Published var spiderManData = [ResultStruct]()
-    @Published var comicsItemName = [String]()
     
     func getData() {
         delegate?.getCardsFromURL(complition: { card in
             self.copyright = card.copyright
             self.attributionText = card.attributionText
             self.spiderManData = card.data.results
+            print(card.data.results)
         })
         isLoaded = true
     }

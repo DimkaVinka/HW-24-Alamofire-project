@@ -14,7 +14,7 @@ struct ContentView: View {
     
     var body: some View {
             ZStack(alignment: .center) {
-                Color.white.edgesIgnoringSafeArea(.all)
+                Color.init(hex: "#EC1D24").edgesIgnoringSafeArea(.all)
                 Button {
                     withAnimation {
                         self.show.toggle()
@@ -54,6 +54,7 @@ struct ContentView: View {
                 if show {
                     TableView(controller: self.controller)
                         .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                        .tint(Color.init(hex: "#EC1D24"))
                 }
         }
     }
