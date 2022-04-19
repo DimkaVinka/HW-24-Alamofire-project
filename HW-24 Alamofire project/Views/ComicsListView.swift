@@ -13,17 +13,15 @@ struct ComicsListView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Comicses")) {
                 ForEach(comicsName, id: \.name) { item in
                     Text(item.name)
                 }
-            }
         }
     }
 }
 
 struct ComicsListView_Previews: PreviewProvider {
     static var previews: some View {
-        ComicsListView(comicsName: [ItemsStruct.init(resourceURI: "", name: "")])
+        ComicsListView(comicsName: [ItemsStruct(resourceURI: "", name: "")])
     }
 }
