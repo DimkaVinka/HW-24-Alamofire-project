@@ -42,12 +42,12 @@ struct CellView: View {
                     } placeholder: {
                         ProgressView()
                     }
-                        
                         .shadow(radius: 5)
                     Text(name)
+                        .foregroundColor(Color.gray)
                     Spacer()
                 }.padding(.horizontal)
-            }
+            }.tint(Color.red)
     }
 }
 
