@@ -12,7 +12,6 @@ struct TableView: View {
     var controller: Controller
     @State var show = false
     @State var columns = [GridItem()]
-    @State var comicsNames = [ItemsStruct]()
 
     var body: some View {
         NavigationView {
@@ -25,27 +24,23 @@ struct TableView: View {
                         .font(.system(size: 25, weight: .heavy, design: .rounded))
                     LazyVGrid(columns: columns) {
                         ForEach(controller.spiderManData, id: \.name) { card in
-                            CellView(image: makeImageURL(path: card.thumbnail.path, extensionToPath: card.thumbnail.extension), name: card.name)
+                            NavigationLink {
+                                ComicsListView(comicsName: card.comics.items)
+                            } label: {
+                                CellView(image: makeImageURL(path: card.thumbnail.path, extensionToPath: card.thumbnail.extension), name: card.name)
+                            }
                         }
                     }
                 }
             }
             .navigationTitle("Versions")
             .navigationBarHidden(true)
-            
         }
         
         if show {
             ContentView()
                 .transition(.asymmetric(insertion: .opacity, removal: .scale))
         }
-    }
-    
-    func makeComics() {
-        for item in controller.spiderManData {
-            self.comicsNames = item.comics.items
-        }
-        
     }
     
     func makeImageURL(path: String, extensionToPath: String) -> String {
