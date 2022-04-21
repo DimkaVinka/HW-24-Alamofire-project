@@ -13,26 +13,24 @@ protocol NetworkManagerProtocol {
 
 class Controller: ObservableObject {
     
-    private var networkManager: NetworkManagerProtocol?
+    private var delegate: NetworkManagerProtocol?
     
-    @Published var copyright = "copyright"
-    @Published var attributionText = "attribute text"
-    @Published var spiderManName = ""
-    @Published var comicsItemName = ""
-    @Published var imageURL = ""
-
-    func makeImageURL(path: String, extensionToPath: String) -> String {
-        return path + "/landscape_xlarge." + extensionToPath
-    }
+    @Published var isLoaded = false
+    @Published var copyright = ""
+    @Published var attributionText = ""
+    @Published var spiderManData = [ResultStruct]()
     
     func getData() {
-        networkManager?.getCardsFromURL(complition: { card in
+        delegate?.getCardsFromURL(complition: { card in
             self.copyright = card.copyright
             self.attributionText = card.attributionText
-            for item in card.data.results {
-                self.spiderManName = item.name
-                self.imageURL = self.makeImageURL(path: item.thumbnail.path, extensionToPath: item.thumbnail.extension)
-            }
+            self.spiderManData = card.data.results
+            print(card.data.results)
         })
+        isLoaded = true
+    }
+    
+    init() {
+        delegate = NetworkManager()
     }
 }
