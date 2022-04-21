@@ -31,9 +31,10 @@ struct CellView: View {
                 Color.init(hex: "#EC1D24")
                     .edgesIgnoringSafeArea(.all)
                 Rectangle()
-                    .frame(width: 300, height: 90, alignment: .center)
+                    .frame(width: .infinity, height: 90, alignment: .center)
                     .foregroundColor(Color.white)
                     .shadow(radius: 7)
+                    .padding(.horizontal)
                     
                 HStack(alignment: .center) {
                     AsyncImage(url: URL(string: image)) { image in
@@ -43,8 +44,10 @@ struct CellView: View {
                         ProgressView()
                     }
                         .shadow(radius: 5)
+                        .padding(.horizontal)
                     Text(name)
                         .foregroundColor(Color.gray)
+                        .multilineTextAlignment(.leading)
                     Spacer()
                 }.padding(.horizontal)
             }.tint(Color.red)

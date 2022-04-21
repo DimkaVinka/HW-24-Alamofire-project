@@ -9,10 +9,12 @@ import SwiftUI
 
 struct TableView: View {
     
-    var controller: Controller
+//    var controller: Controller
     @State var show = false
     @State var columns = [GridItem()]
     @State private var showModal = false
+    @State private var searchText = ""
+    @State var spiderManData = Controller().spiderManData
     
     var body: some View {
         NavigationView {
@@ -21,14 +23,8 @@ struct TableView: View {
                     .edgesIgnoringSafeArea(.all)
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns) {
-                        ForEach(controller.spiderManData, id: \.name) { card in
-                            Button {
-                                showModal = true
-                            } label: {
-                                CellView(image: makeImageURL(path: card.thumbnail.path, extensionToPath: card.thumbnail.extension), name: card.name)
-                            }.sheet(isPresented: $showModal) {
-                                ComicsListView(comicsName: card.comics.items)
-                            }
+                        ForEach(spiderManData, id: \.name) { card in
+                            SpiderManList(spider: card)
                         }
                     }
                 }
@@ -36,30 +32,33 @@ struct TableView: View {
             .navigationTitle(Text("Spider-Man Versions"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    withAnimation(.easeInOut(duration: 1.0)) {
-                        Button {
-                            show = true
-                        } label: {
-                            Image(systemName: "house")
-                        }.foregroundColor(Color.black)
-                    }
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            self.show.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "house")
+                    }.foregroundColor(Color.black)
                 }
             }
-            
+        }
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { text in
+            if !searchText.isEmpty {
+                spiderManData = Controller().spiderManData.filter { $0.name.contains(text)}
+            } else {
+                spiderManData = Controller().spiderManData
+            }
         }
         if show {
             ContentView()
                 .transition(.asymmetric(insertion: .opacity, removal: .opacity))
         }
     }
-    
-    func makeImageURL(path: String, extensionToPath: String) -> String {
-        return path + "/landscape_xlarge." + extensionToPath
-    }
 }
 
 struct TableView_Previews: PreviewProvider {
     static var previews: some View {
-        TableView(controller: Controller())
+        TableView()
     }
 }
