@@ -9,10 +9,9 @@ import SwiftUI
 import SystemConfiguration
 
 struct ContentView: View {
-
-    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
     
-    @ObservedObject var controller = Controller()
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    @EnvironmentObject var controller: Controller
     @State private var show = false
     @State private var showAlert = false
     

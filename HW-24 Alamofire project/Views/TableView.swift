@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TableView: View {
     
-//    var controller: Controller
     @State var show = false
     @State var columns = [GridItem()]
     @State private var showModal = false
     @State private var searchText = ""
-    @State var spiderManData = Controller().spiderManData
+    @EnvironmentObject var controller: Controller
+    @State var spiderManData = [ResultStruct]()
     
     var body: some View {
         NavigationView {
@@ -23,8 +23,8 @@ struct TableView: View {
                     .edgesIgnoringSafeArea(.all)
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns) {
-                        ForEach(spiderManData, id: \.name) { card in
-                            SpiderManList(spider: card)
+                        ForEach($spiderManData, id: \.name) { card in
+                            SpiderManList(spider: card.wrappedValue)
                         }
                     }
                 }
@@ -45,9 +45,9 @@ struct TableView: View {
         .searchable(text: $searchText)
         .onChange(of: searchText) { text in
             if !searchText.isEmpty {
-                spiderManData = Controller().spiderManData.filter { $0.name.contains(text)}
+                spiderManData = controller.spiderManData.filter { $0.name.contains(searchText) }
             } else {
-                spiderManData = Controller().spiderManData
+                spiderManData = controller.spiderManData
             }
         }
         if show {
