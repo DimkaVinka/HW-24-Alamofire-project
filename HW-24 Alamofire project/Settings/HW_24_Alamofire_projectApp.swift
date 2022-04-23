@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct HW_24_Alamofire_projectApp: App {
+    
+    @State private var controller = Controller()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(controller)
         }
     }
 }
